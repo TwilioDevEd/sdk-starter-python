@@ -70,7 +70,7 @@ We need to set up your Python environment. Install `virtualenv` via `pip`:
 pip install virtualenv
 ```
 
-Next, we need to install our depenedencies:
+Next, we need to install our dependencies:
 
 ```bash
 virtualenv venv
