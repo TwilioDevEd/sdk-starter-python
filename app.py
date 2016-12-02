@@ -28,9 +28,9 @@ def sync():
 def notify():
     return app.send_static_file('notify/index.html')
 
-@app.route('/ipmessaging/')
-def ipmessaging():
-    return app.send_static_file('ipmessaging/index.html')
+@app.route('/chat/')
+def chat():
+    return app.send_static_file('chat/index.html')
 
 # Basic health check - check environment variables have been configured
 # correctly
@@ -43,7 +43,7 @@ def config():
         TWILIO_GCM_CREDENTIAL_SID=os.environ['TWILIO_GCM_CREDENTIAL_SID'],
         TWILIO_API_KEY=os.environ['TWILIO_API_KEY'],
         TWILIO_API_SECRET=bool(os.environ['TWILIO_API_SECRET']),
-        TWILIO_IPM_SERVICE_SID=os.environ['TWILIO_IPM_SERVICE_SID'],
+        TWILIO_CHAT_SERVICE_SID=os.environ['TWILIO_CHAT_SERVICE_SID'],
         TWILIO_SYNC_SERVICE_SID=os.environ['TWILIO_SYNC_SERVICE_SID'],
         TWILIO_CONFIGURATION_SID=os.environ['TWILIO_CONFIGURATION_SID']
     )
@@ -56,7 +56,7 @@ def token():
     api_secret = os.environ['TWILIO_API_SECRET']
     sync_service_sid = os.environ['TWILIO_SYNC_SERVICE_SID']
     configuration_profile_sid = os.environ['TWILIO_CONFIGURATION_SID']
-    ipm_service_sid = os.environ['TWILIO_IPM_SERVICE_SID']
+    chat_service_sid = os.environ['TWILIO_CHAT_SERVICE_SID']
 
 
     # create a randomly generated username for the client
@@ -79,10 +79,10 @@ def token():
         video_grant = ConversationsGrant(configuration_profile_sid=configuration_profile_sid)
         token.add_grant(video_grant)
 
-    # Create an IP Messaging grant and add to token
-    if ipm_service_sid:
-        ipm_grant = IpMessagingGrant(endpoint_id=endpoint, service_sid=ipm_service_sid)
-        token.add_grant(ipm_grant)
+    # Create an Chat grant and add to token
+    if chat_service_sid:
+        chat_grant = IpMessagingGrant(endpoint_id=endpoint, service_sid=chat_service_sid)
+        token.add_grant(chat_grant)
 
     # Return token info as JSON
     return jsonify(identity=identity, token=token.to_jwt())
