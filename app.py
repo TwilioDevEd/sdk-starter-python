@@ -79,7 +79,7 @@ def token():
 
     # Create an Chat grant and add to token
     if chat_service_sid:
-        chat_grant = IpMessagingGrant(endpoint_id=endpoint, service_sid=chat_service_sid)
+        chat_grant = IpMessagingGrant(service_sid=chat_service_sid)
         token.add_grant(chat_grant)
 
     # Return token info as JSON
