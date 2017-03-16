@@ -60,16 +60,12 @@ def token():
     # create a randomly generated username for the client
     identity = fake.user_name()
 
-    # Create a unique endpoint ID for the 
-    device_id = request.args.get('device')
-    endpoint = "TwilioAppDemo:{0}:{1}".format(identity, device_id)
-
     # Create access token with credentials
     token = AccessToken(account_sid, api_key, api_secret, identity)
 
     # Create a Sync grant and add to token
     if sync_service_sid:
-        sync_grant = SyncGrant(endpoint_id=endpoint, service_sid=sync_service_sid)
+        sync_grant = SyncGrant(service_sid=sync_service_sid)
         token.add_grant(sync_grant)
 
     # Create a Video grant and add to token
