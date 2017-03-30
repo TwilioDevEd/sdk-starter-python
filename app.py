@@ -2,7 +2,12 @@ import os
 from flask import Flask, jsonify, request
 from faker import Factory
 from twilio.rest import Client
-from twilio.jwt.access_token import AccessToken, SyncGrant, ConversationsGrant, IpMessagingGrant
+from twilio.jwt.access_token import AccessToken
+from twilio.jwt.access_token.grants import (
+    SyncGrant,
+    VideoGrant,
+    IpMessagingGrant
+)
 from dotenv import load_dotenv, find_dotenv
 from os.path import join, dirname
 
@@ -53,7 +58,6 @@ def token():
     api_key = os.environ['TWILIO_API_KEY']
     api_secret = os.environ['TWILIO_API_SECRET']
     sync_service_sid = os.environ['TWILIO_SYNC_SERVICE_SID']
-    configuration_profile_sid = os.environ['TWILIO_CONFIGURATION_SID']
     chat_service_sid = os.environ['TWILIO_CHAT_SERVICE_SID']
 
 
@@ -69,9 +73,8 @@ def token():
         token.add_grant(sync_grant)
 
     # Create a Video grant and add to token
-    if configuration_profile_sid:
-        video_grant = ConversationsGrant(configuration_profile_sid=configuration_profile_sid)
-        token.add_grant(video_grant)
+    video_grant = VideoGrant(room='default_room')
+    token.add_grant(video_grant)
 
     # Create an Chat grant and add to token
     if chat_service_sid:
@@ -89,24 +92,24 @@ def register():
     api_key = os.environ['TWILIO_API_KEY']
     api_secret = os.environ['TWILIO_API_SECRET']
     service_sid = os.environ['TWILIO_NOTIFICATION_SERVICE_SID']
-    
+
     # Initialize the Twilio client
     client = Client(api_key, api_secret, account_sid)
-    
+
     # Body content
     content = request.get_json()
 
     # Get a reference to the notification service
-    service = client.notify.v1.services(service_sid)
+    service = client.notify.services(service_sid)
 
     # Create the binding
     binding = service.bindings.create(
-        endpoint=content["endpoint"], 
-        identity=content["identity"], 
-        binding_type=content["BindingType"], 
+        endpoint=content["endpoint"],
+        identity=content["identity"],
+        binding_type=content["BindingType"],
         address=content["Address"])
 
-    print binding
+    print(binding)
 
     # Return success message
     return jsonify(message="Binding created!")
@@ -119,12 +122,12 @@ def send_notification():
     api_key = os.environ['TWILIO_API_KEY']
     api_secret = os.environ['TWILIO_API_SECRET']
     service_sid = os.environ['TWILIO_NOTIFICATION_SERVICE_SID']
-    
+
     # Initialize the Twilio client
     client = Client(api_key, api_secret, account_sid)
 
-    service = client.notify.v1.services(service_sid)
-  
+    service = client.notify.services(service_sid)
+
     # Create a notification for a given identity
     identity = request.form.get('identity')
     notification = service.notifications.create(
