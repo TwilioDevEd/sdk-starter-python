@@ -65,7 +65,7 @@ def token():
     identity = fake.user_name()
 
     # Create access token with credentials
-    token = AccessToken(account_sid, api_key, api_secret, identity)
+    token = AccessToken(account_sid, api_key, api_secret, identity=identity)
 
     # Create a Sync grant and add to token
     if sync_service_sid:
