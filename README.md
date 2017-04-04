@@ -1,8 +1,12 @@
+<a href="https://www.twilio.com">
+  <img src="https://static0.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg" alt="Twilio" width="250" />
+</a>
+
 # Twilio SDK Starter Application for Python
 
-This sample project demonstrates how to use Twilio APIs in a Python web 
+This sample project demonstrates how to use Twilio APIs in a Python web
 application. Once the app is up and running, check out [the home page](http://localhost:5000)
-to see which demos you can run. You'll find examples for [Chat](https://www.twilio.com/chat), 
+to see which demos you can run. You'll find examples for [Chat](https://www.twilio.com/chat),
 [Video](https://www.twilio.com/video), [Sync](https://www.twilio.com/sync), and more.
 
 Let's get started!
@@ -31,18 +35,17 @@ Every sample in the demo requires some basic credentials from your Twilio accoun
 
 #### A Note on API Keys
 
-When you generate an API key pair at the URLs above, your API Secret will only be shown once - 
+When you generate an API key pair at the URLs above, your API Secret will only be shown once -
 make sure to save this information in a secure location, or possibly your `~/.bash_profile`.
 
 ### Configure product-specific settings
 
-Depending on which demos you'd like to run, you'll need to configure a few more values in your 
+Depending on which demos you'd like to run, you'll need to configure a few more values in your
 `.env` file.
 
 | Config Value  | Product Demo | Description |
 | :-------------  |:------------- |:------------- |
 `TWILIO_CHAT_SERVICE_SID` | Chat | Like a database for your Chat data - [generate one in the console here](https://www.twilio.com/console/chat/services)
-`TWILIO_CONFIGURATION_SID` | Video | Identifier for a set of config properties for your video application - [find yours here](https://www.twilio.com/console/video/profiles)
 `TWILIO_SYNC_SERVICE_SID` | Sync (Preview) | Like a database for your Sync data - generate one with the curl command below.
 `TWILIO_NOTIFICATION_SERVICE_SID` | Notify (Preview) | You will need to create a Notify service - [generate one here](https://www.twilio.com/console/notify/services)
 
@@ -64,7 +67,7 @@ You will need to create a Notify Service through the [Twilio Console](https://ww
 
 ## Run the sample application
 
-This application uses the lightweight [Flask Framework](http://flask.pocoo.org/).  
+This application uses the lightweight [Flask Framework](http://flask.pocoo.org/).
 
 We need to set up your Python environment. Install `virtualenv` via `pip`:
 
