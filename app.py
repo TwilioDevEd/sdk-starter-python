@@ -132,7 +132,7 @@ def send_notification():
     identity = request.form.get('identity')
     notification = service.notifications.create(
         identity=identity,
-        body='Hello ' + identity + '!'
+        body='Hello world!'
     )
 
     return jsonify(message="Notification created!")
