@@ -46,20 +46,8 @@ Depending on which demos you'd like to run, you'll need to configure a few more 
 | Config Value  | Product Demo | Description |
 | :-------------  |:------------- |:------------- |
 `TWILIO_CHAT_SERVICE_SID` | Chat | Like a database for your Chat data - [generate one in the console here](https://www.twilio.com/console/chat/services)
-`TWILIO_SYNC_SERVICE_SID` | Sync (Preview) | Like a database for your Sync data - generate one with the curl command below.
-`TWILIO_NOTIFICATION_SERVICE_SID` | Notify (Preview) | You will need to create a Notify service - [generate one here](https://www.twilio.com/console/notify/services)
-
-#### Temporary: Generating a Sync Service Instance
-
-During the Sync developer preview, you will need to generate Sync service
-instances via API until the Console GUI is available. Using the API key pair you
-generated above, generate a service instance via REST API with this curl command:
-
-```bash
-curl -X POST https://preview.twilio.com/Sync/Services \
- -d 'FriendlyName=MySyncServiceInstance' \
- -u 'SKXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX:your_api_secret'
-```
+`TWILIO_SYNC_SERVICE_SID` | Sync (Preview) | Like a database for your Sync data - [generate one in the console here](https://www.twilio.com/console/sync/services)
+`TWILIO_NOTIFICATION_SERVICE_SID` | Notify (Beta) | You will need to create a Notify service - [generate one here](https://www.twilio.com/console/notify/services)
 
 ### Configuring Notify
 
