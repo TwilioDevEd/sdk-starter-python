@@ -1,4 +1,4 @@
 Flask==0.10.1
 fake-factory==0.5.3
-twilio==6.1.0-alpha1
+twilio~=6.1.0-alpha1
 python-dotenv==0.6.0

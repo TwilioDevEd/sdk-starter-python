@@ -48,7 +48,6 @@ def config():
         TWILIO_API_SECRET=bool(os.environ['TWILIO_API_SECRET']),
         TWILIO_CHAT_SERVICE_SID=os.environ['TWILIO_CHAT_SERVICE_SID'],
         TWILIO_SYNC_SERVICE_SID=os.environ['TWILIO_SYNC_SERVICE_SID'],
-        TWILIO_CONFIGURATION_SID=os.environ['TWILIO_CONFIGURATION_SID']
     )
 
 @app.route('/token')
@@ -73,7 +72,7 @@ def token():
         token.add_grant(sync_grant)
 
     # Create a Video grant and add to token
-    video_grant = VideoGrant(room='default_room')
+    video_grant = VideoGrant(room='default room')
     token.add_grant(video_grant)
 
     # Create an Chat grant and add to token
