@@ -46,7 +46,6 @@ Depending on which demos you'd like to run, you'll need to configure a few more 
 | Config Value  | Product Demo | Description |
 | :-------------  |:------------- |:------------- |
 `TWILIO_CHAT_SERVICE_SID` | Chat | Like a database for your Chat data - [generate one in the console here](https://www.twilio.com/console/chat/services)
-`TWILIO_CONFIGURATION_SID` | Video | Identifier for a set of config properties for your video application - [find yours here](https://www.twilio.com/console/video/profiles)
 `TWILIO_SYNC_SERVICE_SID` | Sync (Preview) | Like a database for your Sync data - [generate one in the console here](https://www.twilio.com/console/sync/services)
 `TWILIO_NOTIFICATION_SERVICE_SID` | Notify (Beta) | You will need to create a Notify service - [generate one here](https://www.twilio.com/console/notify/services)
 
