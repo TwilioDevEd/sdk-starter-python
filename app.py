@@ -72,7 +72,7 @@ def token():
         token.add_grant(sync_grant)
 
     # Create a Video grant and add to token
-    video_grant = VideoGrant(room='default room')
+    video_grant = VideoGrant()
     token.add_grant(video_grant)
 
     # Create an Chat grant and add to token
