@@ -81,7 +81,7 @@ def token():
         token.add_grant(chat_grant)
 
     # Return token info as JSON
-    return jsonify(identity=identity, token=token.to_jwt())
+    return jsonify(identity=identity, token=token.to_jwt().decode('utf-8'))
 
 # Notify - create a device binding from a POST HTTP request
 @app.route('/register', methods=['POST'])
