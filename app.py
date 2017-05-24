@@ -103,7 +103,6 @@ def register():
 
     # Create the binding
     binding = service.bindings.create(
-        endpoint=content["endpoint"],
         identity=content["identity"],
         binding_type=content["BindingType"],
         address=content["Address"])
