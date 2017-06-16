@@ -12,7 +12,7 @@ from dotenv import load_dotenv, find_dotenv
 from os.path import join, dirname
 from inflection import underscore
 
-# Convert keys to snake_case to conform with the python api definition contract
+# Convert keys to snake_case to conform with the twilio-python api definition contract
 def snake_case_keys(somedict):
     return dict(map(lambda (key, value): (underscore(key), value), somedict.items()))
 
