@@ -10,7 +10,11 @@ from twilio.jwt.access_token.grants import (
 )
 from dotenv import load_dotenv, find_dotenv
 from os.path import join, dirname
+from inflection import underscore
 
+# Convert keys to snake_case to conform with the python api definition contract
+def snake_case_keys(somedict):
+    return dict(map(lambda (key, value): (underscore(key), value), somedict.items()))
 
 app = Flask(__name__)
 fake = Factory.create()
@@ -50,8 +54,8 @@ def config():
         TWILIO_SYNC_SERVICE_SID=os.environ['TWILIO_SYNC_SERVICE_SID'],
     )
 
-@app.route('/token')
-def token():
+@app.route('/token', methods=['POST', 'GET'])
+def token(identity = None):
     # get credentials for environment variables
     account_sid = os.environ['TWILIO_ACCOUNT_SID']
     api_key = os.environ['TWILIO_API_KEY']
@@ -59,9 +63,8 @@ def token():
     sync_service_sid = os.environ['TWILIO_SYNC_SERVICE_SID']
     chat_service_sid = os.environ['TWILIO_CHAT_SERVICE_SID']
 
-
-    # create a randomly generated username for the client
-    identity = fake.user_name()
+    # assign the provided identity or generate a new one
+    identity = identity or fake.user_name()
 
     # Create access token with credentials
     token = AccessToken(account_sid, api_key, api_secret, identity=identity)
@@ -98,14 +101,13 @@ def register():
     # Body content
     content = request.get_json()
 
+    content = snake_case_keys(content)
+
     # Get a reference to the notification service
     service = client.notify.services(service_sid)
 
     # Create the binding
-    binding = service.bindings.create(
-        identity=content["identity"],
-        binding_type=content["BindingType"],
-        address=content["Address"])
+    binding = service.bindings.create(**content)
 
     print(binding)
 
@@ -126,12 +128,13 @@ def send_notification():
 
     service = client.notify.services(service_sid)
 
-    # Create a notification for a given identity
-    identity = request.form.get('identity')
-    notification = service.notifications.create(
-        identity=identity,
-        body='Hello world!'
-    )
+    # Get the request json or form data
+    content = request.get_json() if request.get_json() else request.form
+
+    content = snake_case_keys(content)
+
+    # Create a notification with the given form data
+    notification = service.notifications.create(**content)
 
     return jsonify(message="Notification created!")
 
