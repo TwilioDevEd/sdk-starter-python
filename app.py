@@ -54,17 +54,30 @@ def config():
         TWILIO_SYNC_SERVICE_SID=os.environ['TWILIO_SYNC_SERVICE_SID'],
     )
 
-@app.route('/token', methods=['POST', 'GET'])
-def token(identity = None):
+@app.route('/token', methods=['GET'])
+def randomToken():
+    return generateToken(fake.user_name())
+
+
+@app.route('/token', methods=['POST'])
+def createToken():
+    # Get the request json or form data
+    content = request.get_json() or request.form
+    # get the identity from the request, or make one up
+    identity = content.get('identity', fake.user_name())
+    return generateToken(identity)
+
+@app.route('/token/<identity>', methods=['POST', 'GET'])
+def token(identity):
+    return generateToken(identity)
+
+def generateToken(identity):
     # get credentials for environment variables
     account_sid = os.environ['TWILIO_ACCOUNT_SID']
     api_key = os.environ['TWILIO_API_KEY']
     api_secret = os.environ['TWILIO_API_SECRET']
     sync_service_sid = os.environ['TWILIO_SYNC_SERVICE_SID']
     chat_service_sid = os.environ['TWILIO_CHAT_SERVICE_SID']
-
-    # assign the provided identity or generate a new one
-    identity = identity or fake.user_name()
 
     # Create access token with credentials
     token = AccessToken(account_sid, api_key, api_secret, identity=identity)
@@ -85,6 +98,9 @@ def token(identity = None):
 
     # Return token info as JSON
     return jsonify(identity=identity, token=token.to_jwt().decode('utf-8'))
+
+
+
 
 # Notify - create a device binding from a POST HTTP request
 @app.route('/register', methods=['POST'])
