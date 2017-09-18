@@ -62,9 +62,9 @@ def randomToken():
 @app.route('/token', methods=['POST'])
 def createToken():
     # Get the request json or form data
-    content = request.get_json() if request.get_json() else request.form
+    content = request.get_json() or request.form
     # get the identity from the request, or make one up
-    identity = content['identity'] if content['identity'] else fake.user_name()
+    identity = content.get('identity', fake.user_name())
     return generateToken(identity)
 
 @app.route('/token/<identity>', methods=['POST', 'GET'])
