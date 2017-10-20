@@ -6,7 +6,7 @@ from twilio.jwt.access_token import AccessToken
 from twilio.jwt.access_token.grants import (
     SyncGrant,
     VideoGrant,
-    IpMessagingGrant
+    ChatGrant
 )
 from dotenv import load_dotenv, find_dotenv
 from os.path import join, dirname
@@ -76,7 +76,7 @@ def generateToken(identity):
     account_sid = os.environ['TWILIO_ACCOUNT_SID']
     api_key = os.environ['TWILIO_API_KEY']
     api_secret = os.environ['TWILIO_API_SECRET']
-    sync_service_sid = os.environ['TWILIO_SYNC_SERVICE_SID']
+    sync_service_sid = os.environ.get('TWILIO_SYNC_SERVICE_SID', 'default')
     chat_service_sid = os.environ['TWILIO_CHAT_SERVICE_SID']
 
     # Create access token with credentials
@@ -93,7 +93,7 @@ def generateToken(identity):
 
     # Create an Chat grant and add to token
     if chat_service_sid:
-        chat_grant = IpMessagingGrant(service_sid=chat_service_sid)
+        chat_grant = ChatGrant(service_sid=chat_service_sid)
         token.add_grant(chat_grant)
 
     # Return token info as JSON
