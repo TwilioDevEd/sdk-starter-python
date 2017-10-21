@@ -14,7 +14,10 @@ from inflection import underscore
 
 # Convert keys to snake_case to conform with the twilio-python api definition contract
 def snake_case_keys(somedict):
-    return dict(map(lambda key, value: (underscore(key), value), somedict.items()))
+    snake_case_dict = {}
+    for key, value in somedict.items():
+        snake_case_dict[underscore(key)] = value
+    return snake_case_dict
 
 app = Flask(__name__)
 fake = Factory.create()
