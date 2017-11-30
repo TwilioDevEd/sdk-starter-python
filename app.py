@@ -50,11 +50,11 @@ def chat():
 def config():
     return jsonify(
         TWILIO_ACCOUNT_SID=os.environ['TWILIO_ACCOUNT_SID'],
-        TWILIO_NOTIFICATION_SERVICE_SID=os.environ['TWILIO_NOTIFICATION_SERVICE_SID'],
+        TWILIO_NOTIFICATION_SERVICE_SID=os.environ.get('TWILIO_NOTIFICATION_SERVICE_SID', None),
         TWILIO_API_KEY=os.environ['TWILIO_API_KEY'],
         TWILIO_API_SECRET=bool(os.environ['TWILIO_API_SECRET']),
-        TWILIO_CHAT_SERVICE_SID=os.environ['TWILIO_CHAT_SERVICE_SID'],
-        TWILIO_SYNC_SERVICE_SID=os.environ['TWILIO_SYNC_SERVICE_SID'],
+        TWILIO_CHAT_SERVICE_SID=os.environ.get('TWILIO_CHAT_SERVICE_SID', None),
+        TWILIO_SYNC_SERVICE_SID=os.environ.get('TWILIO_SYNC_SERVICE_SID', None),
     )
 
 @app.route('/token', methods=['GET'])
@@ -80,7 +80,7 @@ def generateToken(identity):
     api_key = os.environ['TWILIO_API_KEY']
     api_secret = os.environ['TWILIO_API_SECRET']
     sync_service_sid = os.environ.get('TWILIO_SYNC_SERVICE_SID', 'default')
-    chat_service_sid = os.environ['TWILIO_CHAT_SERVICE_SID']
+    chat_service_sid = os.environ.get('TWILIO_CHAT_SERVICE_SID', None)
 
     # Create access token with credentials
     token = AccessToken(account_sid, api_key, api_secret, identity=identity)
