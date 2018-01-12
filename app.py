@@ -54,7 +54,7 @@ def config():
         TWILIO_API_KEY=os.environ['TWILIO_API_KEY'],
         TWILIO_API_SECRET=bool(os.environ['TWILIO_API_SECRET']),
         TWILIO_CHAT_SERVICE_SID=os.environ.get('TWILIO_CHAT_SERVICE_SID', None),
-        TWILIO_SYNC_SERVICE_SID=os.environ.get('TWILIO_SYNC_SERVICE_SID', None),
+        TWILIO_SYNC_SERVICE_SID=os.environ.get('TWILIO_SYNC_SERVICE_SID', 'default'),
     )
 
 @app.route('/token', methods=['GET'])
@@ -161,5 +161,11 @@ def send_notification():
 def static_file(path):
     return app.send_static_file(path)
 
+# Ensure that the Sync Default Service is provisioned
+def provision_sync_default_service():
+    client = Client(os.environ['TWILIO_API_KEY'], os.environ['TWILIO_API_SECRET'], os.environ['TWILIO_ACCOUNT_SID'])
+    client.sync.services('default').fetch()
+
 if __name__ == '__main__':
+    provision_sync_default_service()
     app.run(debug=True, host='0.0.0.0')
