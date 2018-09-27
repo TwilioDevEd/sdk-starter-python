@@ -1,5 +1,5 @@
 Flask==1.0.2
-fake-factory==0.5.3
+faker==0.9.1
 twilio==6.17.0
 python-dotenv==0.9.1
 inflection==0.3.1
