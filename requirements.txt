@@ -1,5 +1,5 @@
-Flask==0.10.1
+Flask==1.0.2
 fake-factory==0.5.3
-twilio==6.14.0
-python-dotenv==0.6.0
+twilio==6.17.0
+python-dotenv==0.9.1
 inflection==0.3.1
