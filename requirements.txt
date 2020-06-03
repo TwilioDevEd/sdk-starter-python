@@ -1,5 +1,5 @@
-Flask==1.1.1
-faker==2.0.2
-twilio==6.31.0
-python-dotenv==0.10.3
+Flask==1.1.2
+faker==3.0.1
+twilio==6.41.0
+python-dotenv==0.13.0
 inflection==0.3.1
