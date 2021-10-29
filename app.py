@@ -8,7 +8,7 @@ from twilio.jwt.access_token.grants import (
     VideoGrant,
     ChatGrant
 )
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
 from os.path import join, dirname
 from inflection import underscore
 
@@ -168,4 +168,4 @@ def provision_sync_default_service():
 
 if __name__ == '__main__':
     provision_sync_default_service()
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=os.environ['DEBUG'], host='0.0.0.0')
