@@ -22,7 +22,7 @@ cp .env.example .env
 ```
 
 Open `.env` in your favorite text editor and configure the following values. The application runs
-by default in `production` environment. Feel free to update `DEBUG` to False if needed.
+by default in `production` environment. Feel free to update `DEBUG` to True if needed.
 
 ### Configure account information
 
