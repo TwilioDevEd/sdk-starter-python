@@ -100,7 +100,7 @@ def generateToken(identity):
         token.add_grant(chat_grant)
 
     # Return token info as JSON
-    return jsonify(identity=identity, token=token.to_jwt().decode('utf-8'))
+    return jsonify(identity=identity, token=token.to_jwt())
 
 
 
