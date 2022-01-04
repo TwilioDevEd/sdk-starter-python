@@ -22,7 +22,7 @@ def snake_case_keys(somedict):
 app = Flask(__name__)
 fake = Faker()
 dotenv_path = join(dirname(__file__), '.env')
-load_dotenv(dotenv_path)
+load_dotenv(dotenv_path, override=True)
 
 @app.route('/')
 def index():

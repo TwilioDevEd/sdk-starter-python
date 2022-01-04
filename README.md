@@ -39,6 +39,8 @@ Every sample in the demo requires some basic credentials from your Twilio accoun
 When you generate an API key pair at the URLs above, your API Secret will only be shown once -
 make sure to save this information in a secure location, or possibly your `~/.bash_profile`.
 
+Note also that in this starter kit, variables set in `.env` will override those in your `.bash_profile` and/or `.bashrc`.
+
 ### Configure product-specific settings
 
 Depending on which demos you'd like to run, you may need to configure a few more values in your `.env` file.
